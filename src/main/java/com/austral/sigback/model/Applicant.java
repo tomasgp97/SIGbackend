@@ -9,9 +9,17 @@ public class Applicant {
     @Id
     @GeneratedValue()
     private Long id;
+
+    @Column(nullable = false, name = "first_name")
     private String firstName;
+
+    @Column(nullable = false, name = "last_name")
     private String lastName;
+
+    @Column(nullable = false, name = "email")
     private String email;
+
+    @Column(nullable = false, name = "application_request")
     private String applicationRequest;
 
     @ManyToOne

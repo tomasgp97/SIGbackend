@@ -2,14 +2,16 @@ package com.austral.sigback.model;
 
 import com.austral.sigback.dto.UserDto;
 import com.austral.sigback.utils.Role;
+import java.util.List;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 
 @Entity()
 @Table(name = "users")
+
 public class User {
 
     @Id
@@ -25,11 +27,11 @@ public class User {
     @Size(max = 100)
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "password")
     @Size(max = 100)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "email")
     @Size(max = 100)
     private String email;
 
