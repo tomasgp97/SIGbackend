@@ -18,6 +18,28 @@ public class Application {
     @Column(name = "jobid")
     private Long jobId;
 
+    @Column(name="speech")
+    private String speech;
+
+    @Column(name="contact")
+    private String contact;
+
+    public String getSpeech() {
+        return speech;
+    }
+
+    public void setSpeech(String speech) {
+        this.speech = speech;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
     public Long getJobId() {
         return jobId;
     }

@@ -3,6 +3,7 @@ package com.austral.sigback.service;
 import com.austral.sigback.model.Application;
 import com.austral.sigback.repository.ApplicationRepository;
 import com.austral.sigback.utils.ApplicationStatus;
+import com.austral.sigback.utils.BudgetStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +24,12 @@ public class ApplicationService {
     }
 
     public Application saveApplication(Application application) {
+        application.setStatus(ApplicationStatus.TO_REVIEW);
         return this.applicationRepository.save(application);
     }
 
     public List<Application> getApplicationsForJob(Long jobId) {
-        return null;
+        return this.applicationRepository.findAll().stream().filter(a -> a.getJobId().equals(jobId)).collect(Collectors.toList());
     }
 
     public Application updateApplicationStatus(ApplicationStatus status, Long id) {
@@ -36,17 +38,8 @@ public class ApplicationService {
         return this.applicationRepository.save(applicationOptional.get());
     }
 
-    public List<Application> getFirstInterviewApplications() {
-        return this.applicationRepository.findAll().stream().filter(a -> a.getStatus().equals(ApplicationStatus.FIRST_INTERVIEW)).collect(Collectors.toList());
+    public List<Application> getApplicationsByStatus(ApplicationStatus status) {
+        return this.applicationRepository.findAll().stream().filter(a -> a.getStatus().equals(status)).collect(Collectors.toList());
     }
-
-    public List<Application> getSecondInterviewApplications() {
-        return this.applicationRepository.findAll().stream().filter(a -> a.getStatus().equals(ApplicationStatus.SECOND_INTERVIEW)).collect(Collectors.toList());
-    }
-
-    public List<Application> getToReiewInterviewApplications() {
-        return this.applicationRepository.findAll().stream().filter(a -> a.getStatus().equals(ApplicationStatus.TO_REVIEW)).collect(Collectors.toList());
-    }
-
 
 }
