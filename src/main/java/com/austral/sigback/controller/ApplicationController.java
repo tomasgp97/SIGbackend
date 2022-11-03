@@ -63,10 +63,8 @@ public class ApplicationController {
     }
 
     @GetMapping("/duration")
-    public ResponseEntity<Integer> getProcessDuration(DurationDto dto){
+    public ResponseEntity<Integer> getProcessDuration(@RequestBody DurationDto dto){
         int duration = this.applicationService.getProcessDurationIndicator(dto.getJobId(), dto.getApplicationId());
         return new ResponseEntity<>(duration, HttpStatus.OK);
     }
-
-
 }

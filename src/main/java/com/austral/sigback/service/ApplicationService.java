@@ -48,21 +48,21 @@ public class ApplicationService {
     }
 
     public Double getApplicationEfficiencyIndicator() {
-        int hired = this.applicationRepository.findAll().stream().
+        Double hired = (double) this.applicationRepository.findAll().stream().
                 filter(a -> a.getStatus().equals(ApplicationStatus.APPROVED)).toArray().length;
 
-        int total = this.applicationRepository.findAll().toArray().length;
-
-        return (double) (hired / total);
+        Double total = (double) this.applicationRepository.findAll().toArray().length;
+        System.out.println(hired/total);
+        return  (hired / total);
     }
 
     public Double getApplicationClarityIndicator() {
-        int firstInterview = this.applicationRepository.findAll().stream().
+        Double firstInterview = (double) this.applicationRepository.findAll().stream().
                 filter(a -> a.getStatus().equals(ApplicationStatus.FIRST_INTERVIEW)).toArray().length;
 
-        int total = this.applicationRepository.findAll().toArray().length;
+        Double total = (double) this.applicationRepository.findAll().toArray().length;
 
-        return (double) (firstInterview/total);
+        return (firstInterview/total);
     }
 
     public int getProcessDurationIndicator(Long jobId, Long applicationId) {

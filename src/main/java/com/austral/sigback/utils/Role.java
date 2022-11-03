@@ -1,5 +1,5 @@
 package com.austral.sigback.utils;
 
 public enum Role {
-    FINANCE, RR_HH, TEAM_LEADER, APPLICANT
+    FINANCE, RR_HH, TEAM_LEADER
 }
