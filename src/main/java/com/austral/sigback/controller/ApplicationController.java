@@ -4,7 +4,6 @@ package com.austral.sigback.controller;
 import com.austral.sigback.dto.ApplicationDto;
 import com.austral.sigback.dto.DurationDto;
 import com.austral.sigback.model.Application;
-import com.austral.sigback.model.Budget;
 import com.austral.sigback.service.ApplicationService;
 import com.austral.sigback.utils.ApplicationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,12 @@ public class ApplicationController {
         return new ResponseEntity<>(applications, HttpStatus.OK);
     }
 
+    @GetMapping("/rh")
+    public ResponseEntity<List<Application>> getApplicationsRh() {
+        List<Application> applications = this.applicationService.getAllApplicationsRh();
+        return new ResponseEntity<>(applications, HttpStatus.OK);
+    }
+
     @GetMapping("/jobs")
     public ResponseEntity<List<Application>> getApplicationsForJob(@RequestParam Long jobId) {
         List<Application> applications = this.applicationService.getApplicationsForJob(jobId);
@@ -63,7 +68,7 @@ public class ApplicationController {
     }
 
     @GetMapping("/duration")
-    public ResponseEntity<Integer> getProcessDuration(@RequestBody DurationDto dto){
+    public ResponseEntity<Integer> getProcessDuration(@RequestBody DurationDto dto) {
         int duration = this.applicationService.getProcessDurationIndicator(dto.getJobId(), dto.getApplicationId());
         return new ResponseEntity<>(duration, HttpStatus.OK);
     }

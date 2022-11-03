@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,6 +32,17 @@ public class ApplicationService {
     public Application saveApplication(Application application) {
         application.setStatus(ApplicationStatus.TO_REVIEW);
         return this.applicationRepository.save(application);
+    }
+
+    public List<Application> getAllApplicationsRh() {
+        List<Application> applicationsTR = this.applicationRepository.findAll()
+                .stream().filter(a -> a.getStatus().equals(ApplicationStatus.TO_REVIEW)).collect(Collectors.toList());
+        List<Application> applicationsFI = this.applicationRepository.findAll()
+                .stream().filter(a -> a.getStatus().equals(ApplicationStatus.FIRST_INTERVIEW)).collect(Collectors.toList());
+        List<Application> ret = new ArrayList<>();
+        ret.addAll(applicationsTR);
+        ret.addAll(applicationsFI);
+        return ret;
     }
 
     public List<Application> getApplicationsForJob(Long jobId) {
@@ -70,6 +82,8 @@ public class ApplicationService {
          LocalDateTime applicationDate = this.applicationRepository.findById(applicationId).get().getUpdatedAt();
         return Period.between(jobDate.toLocalDate(), applicationDate.toLocalDate()).getDays();
     }
+
+
 
 
 
