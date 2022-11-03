@@ -1,35 +1,56 @@
 package com.austral.sigback.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "job")
 public class Job {
 
-
     @Id
-    @GeneratedValue()
-    @Column(name = "job_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(name = "description")
     private String description;
 
+    @Column(name = "requierements")
     private String requirements;
 
-    @OneToMany(mappedBy = "applicant")
-    private List<Applicant> applicants;
+    @Column(name = "position")
+    private String position;
 
-    @ManyToMany(mappedBy = "users")
-    private List<User> users;
+    @Column(name = "salary")
+    private Double salary;
 
-    public List<User> getUsers() {
-        return users;
+    public String getPosition() {
+        return position;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setPosition(String position) {
+        this.position = position;
     }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    //    @ManyToMany(mappedBy = "jobs",  cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+//    private Set<User> users = new HashSet<>();
+//
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 
     public Long getId() {
         return id;
@@ -39,11 +60,21 @@ public class Job {
         this.id = id;
     }
 
-    public List<Applicant> getApplicants() {
-        return applicants;
+    public String getDescription() {
+        return description;
     }
 
-    public void setApplicants(List<Applicant> applicants) {
-        this.applicants = applicants;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    public String getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(String requirements) {
+        this.requirements = requirements;
+    }
+
+
 }
