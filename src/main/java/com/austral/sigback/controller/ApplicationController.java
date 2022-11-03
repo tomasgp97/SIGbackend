@@ -2,6 +2,7 @@ package com.austral.sigback.controller;
 
 
 import com.austral.sigback.dto.ApplicationDto;
+import com.austral.sigback.dto.DurationDto;
 import com.austral.sigback.model.Application;
 import com.austral.sigback.model.Budget;
 import com.austral.sigback.service.ApplicationService;
@@ -46,6 +47,25 @@ public class ApplicationController {
     public ResponseEntity<Application> updateApplicationStatus(@RequestBody ApplicationDto dto){
         Application updated = this.applicationService.updateApplicationStatus(dto.getStatus(), dto.getId());
         return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
+
+    @GetMapping("/efficiency")
+    public ResponseEntity<Double> getEfficiencyIndicator() {
+       Double efficiency =  this.applicationService.getApplicationEfficiencyIndicator();
+       return new ResponseEntity<>(efficiency, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/clarity")
+    public ResponseEntity<Double> getClarityIndicator() {
+        Double clarity = this.applicationService.getApplicationClarityIndicator();
+        return new ResponseEntity<>(clarity, HttpStatus.OK);
+    }
+
+    @GetMapping("/duration")
+    public ResponseEntity<Integer> getProcessDuration(DurationDto dto){
+        int duration = this.applicationService.getProcessDurationIndicator(dto.getJobId(), dto.getApplicationId());
+        return new ResponseEntity<>(duration, HttpStatus.OK);
     }
 
 

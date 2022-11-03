@@ -1,8 +1,10 @@
 package com.austral.sigback.model;
 
 import com.austral.sigback.utils.ApplicationStatus;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity()
 @Table(name = "application")
@@ -23,6 +25,18 @@ public class Application {
 
     @Column(name="contact")
     private String contact;
+
+    @UpdateTimestamp
+    @Column
+    private LocalDateTime updatedAt;
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public String getSpeech() {
         return speech;

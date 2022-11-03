@@ -16,14 +16,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-//    @Column(name = "first_name", nullable = false)
-//    @Size(max = 100)
-//    private String firstName;
-//
-//    @Column(name = "last_name", nullable = false)
-//    @Size(max = 100)
-//    private String lastName;
-
     @Column(nullable = false, name = "password")
     @Size(max = 100)
     private String password;
@@ -35,6 +27,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
+
+    //    @Column(name = "first_name", nullable = false)
+//    @Size(max = 100)
+//    private String firstName;
+//
+//    @Column(name = "last_name", nullable = false)
+//    @Size(max = 100)
+//    private String lastName;
 
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    @JoinTable(name = "job_user",

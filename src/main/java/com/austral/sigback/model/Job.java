@@ -1,6 +1,9 @@
 package com.austral.sigback.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +27,19 @@ public class Job {
 
     @Column(name = "salary")
     private Double salary;
+
+    @Column
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public String getPosition() {
         return position;
