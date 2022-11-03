@@ -27,17 +27,14 @@ public class BudgetService {
         return this.budgetRepository.save(budget);
     }
 
-    public List<Budget> getAllBudgets() {
-        return this.budgetRepository.findAll().stream().filter(b -> b.getStatus().equals(BudgetStatus.REVIEW)).collect(Collectors.toList());
+    public List<Budget> getBudgetByStatus(BudgetStatus status) {
+        return this.budgetRepository.findAll().stream().filter(b -> b.getStatus().equals(status)).collect(Collectors.toList());
     }
 
-    public List<Budget> getApprovedBudgets() {
-        return this.budgetRepository.findAll().stream().filter(b -> b.getStatus().equals(BudgetStatus.APPROVED)).collect(Collectors.toList());
-    }
 
-    public Budget updateBudget(Budget budget) {
-        Optional<Budget> budgetOptional = this.budgetRepository.findById(budget.getId());
-        budgetOptional.ifPresent(value -> value.setStatus(budget.getStatus()));
+    public Budget updateBudget(Long id, BudgetStatus status) {
+        Optional<Budget> budgetOptional = this.budgetRepository.findById(id);
+        budgetOptional.ifPresent(value -> value.setStatus(status));
         return this.budgetRepository.save(budgetOptional.get());
     }
 

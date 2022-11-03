@@ -1,7 +1,6 @@
 package com.austral.sigback.controller;
 
 import com.austral.sigback.model.Job;
-import com.austral.sigback.model.User;
 import com.austral.sigback.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
